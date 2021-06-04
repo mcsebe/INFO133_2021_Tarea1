@@ -1,0 +1,47 @@
+Colección “Usuario”
+
+{ 
+	RUT,
+	nombre,
+	apellido,
+	Archivo_Audio : [{ 
+			ID_archivo,
+			formato,
+			exterior,
+			fecha_grabacion,
+			duracion,
+			longitud,
+			latitud,
+			ciudad,
+			fecha upload,
+			RUT_Usuario,
+			Segmentos : [{
+				ID_segmento,
+				formato,
+				duracion,
+				inicio,
+				fin,
+				ID_archivo
+			}]
+		}]
+}
+
+Colección “Fuentes”
+
+{ 
+	nombre_fuente,
+	descripción,
+	nombre_super_categoria
+}
+
+Colección “Analizar ”
+
+{ 
+	nombre,
+	ID_segmento,
+	nombre_fuente,
+	porcentaje
+}
+
+
+
