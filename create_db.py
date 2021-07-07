@@ -1,4 +1,5 @@
 from pymongo import MongoClient
+from add_wavfile import encode_audio
 
 MONGO_URI = 'mongodb://localhost'
 
@@ -12,7 +13,7 @@ def AgegarDato(collection):
 	collection.insert_many([
 	{ 
 		"ID_archivo" : 1,
-		"sonido": None,
+		"sonido": encode_audio("impresora1.wav"),
 		"formato" : "wav",
 		"exterior" : "interior",
 		"fecha_grabacion" : "30-06-2021",
@@ -52,7 +53,7 @@ def AgegarDato(collection):
 	
 	{ 
 		"ID_archivo" : 2,
-		"sonido": None,
+		"sonido": encode_audio("auto2.wav"),
 		"formato" : "wav",
 		"exterior" : "exterior",
 		"fecha_grabacion" : "25-06-2021",
@@ -85,7 +86,7 @@ def AgegarDato(collection):
 	
 	{ 
 		"ID_archivo" : 3,
-		"sonido": None,
+		"sonido": encode_audio("lluvia3.wav"),
 		"formato" : "wav",
 		"exterior" : "exterior",
 		"fecha_grabacion" : "28-06-2021",
@@ -118,7 +119,7 @@ def AgegarDato(collection):
 
 	{ 
 		"ID_archivo" : 4,
-		"sonido": None,
+		"sonido": encode_audio("viento4.wav"),
 		"formato" : "wav",
 		"exterior" : "exterior",
 		"fecha_grabacion" : "27-06-2021",
@@ -151,7 +152,7 @@ def AgegarDato(collection):
 	
 	{ 
 		"ID_archivo" : 5,
-		"sonido": None,
+		"sonido": encode_audio("sirena5.wav"),
 		"formato" : "wav",
 		"exterior" : "exterior",
 		"fecha_grabacion" : "26-06-2021",
@@ -184,7 +185,7 @@ def AgegarDato(collection):
 	
 	{ 
 		"ID_archivo" : 6,
-		"sonido": None,
+		"sonido": encode_audio("motosierra6.wav"),
 		"formato" : "wav",
 		"exterior" : "exterior",
 		"fecha_grabacion" : "30-06-2021",
@@ -217,7 +218,7 @@ def AgegarDato(collection):
 	
 	{ 
 		"ID_archivo" : 7,
-		"sonido": None,
+		"sonido": encode_audio("perro7.wav"),
 		"formato" : "wav",
 		"exterior" : "interior",
 		"fecha_grabacion" : "28-06-2021",
@@ -249,41 +250,8 @@ def AgegarDato(collection):
 	},
 	
 	{ 
-		"ID_archivo" : 7,
-		"sonido": None,
-		"formato" : "wav",
-		"exterior" : "interior",
-		"fecha_grabacion" : "28-06-2021",
-		"duracion" : 22,
-		"latitud" : -39.83313732002285,
-		"longitud" : -73.23865156445318,
-		"ciudad" : "Valdivia", 
-		"fecha upload" : "28-06-2021",
-		"Usuario" : {
-			"RUT": "18122610-2",
-			"nombre": "Lluc",
-			"apellido": "Simon",
-		},
-		"Segmentos" : [{
-			"ID_segmento" : 106,
-			"formato" : "wav",
-			"duracion" : 22,
-			"inicio" : 0,
-			"fin" : 22,
-			"Analizar": [{
-				"tipo_analizador" : "Humano",
-				"porcentaje" : None,
-				"nombre_fuente": "Perro",
-				"descripción": "Perro ladrando al interior de una casa.",
-				"nombre_fuente_categoria": "Animales"			
-			}]
-		}]
-
-	},
-	
-	{ 
 		"ID_archivo" : 8,
-		"sonido": None,
+		"sonido": encode_audio("pajaro8.wav"),
 		"formato" : "wav",
 		"exterior" : "exterior",
 		"fecha_grabacion" : "27-06-2021",
@@ -316,7 +284,7 @@ def AgegarDato(collection):
 	
 	{ 
 		"ID_archivo" : 9,
-		"sonido": None,
+		"sonido": encode_audio("restaurant9.wav"),
 		"formato" : "wav",
 		"exterior" : "interior",
 		"fecha_grabacion" : "25-06-2021",
@@ -349,7 +317,7 @@ def AgegarDato(collection):
 	
 	{ 
 		"ID_archivo" : 10,
-		"sonido": None,
+		"sonido": encode_audio("gato10.wav"),
 		"formato" : "wav",
 		"exterior" : "interior",
 		"fecha_grabacion" : "27-06-2021",

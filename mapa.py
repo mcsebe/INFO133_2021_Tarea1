@@ -2,7 +2,7 @@ import folium
 import branca
 import webbrowser
 from pymongo import MongoClient
-
+from add_wavfile import decode_audio
 from playsound import playsound
 
 mapa = folium.Map(location = [-39.81730435463257, -73.24257650930436], zoom_start=13 ,control_scale = True)
@@ -27,12 +27,6 @@ def MostrarDia(mapa):
 		html += "<p>Fecha de grabacion: " + str(documento['fecha_grabacion']) + "</p>"
 		html += "<p>Nombre de la fuente: " + str(documento['Segmentos'][0]['Analizar'][0]['nombre_fuente']) + "</p>"
 		html += "<p>Categoria: " + str(documento['Segmentos'][0]['Analizar'][0]['nombre_fuente_categoria']) + "</p>"
-		html += '''
-			<audio controls>
-			    <source src="file:///home/mcsebe/Desktop/UACH/Datos/INFO133_2021_Tarea1/impresora1.wav" type="audio/wav">
-				Tu navegador no soporta audio HTML5.
-			</audio>
-			'''
 			
 		iframe3 = branca.element.IFrame(html=html, width=800, height=340)
 	
@@ -72,7 +66,7 @@ def send_data():
 	Mecanicos_info = bool(Mecanicos.get())
 	Vehiculos_info = bool(Vehiculos.get())
 	Alertas_info = bool(Alertas.get())
-    
+    	
 	if (fechavalor_info != "" and fechavalor_info != "-"):
 		for documento in collection.find({ "fecha_grabacion": fechavalor_info}):
 
@@ -134,21 +128,28 @@ def send_data():
 				)
 				marcador1.add_to(mapa)
 				
-	def play():
-	    playsound('impresora1.wav')
-	 
-	 
-	play_button = Button(mywindow, text="Play Song", font=("Helvetica", 12), command=play)
-	play_button.place(x=250, y=205)
     
 	mapa.save("mapa_test.html")
 	webbrowser.open("mapa_test.html")
 
 
 
+def play():
+	ID_info = int(ID.get())
+	
+	MONGO_URI = 'mongodb://localhost'
+
+	client = MongoClient(MONGO_URI)
+
+	db = client['Tarea']
+	collection = db['Audios']
+	info = collection.find({ "ID_archivo": ID_info})[0]
+	
+	decode_audio(info["sonido"])
+
 # Create new instance - Class Tk()
 mywindow = Tk()
-mywindow.geometry("450x400")
+mywindow.geometry("450x500")
 mywindow.title("Mapa de Audios en Valdivia")
 mywindow.resizable(False, False)
 mywindow.config(background="#F8F7EF")
@@ -194,6 +195,18 @@ Checkbutton(mywindow, text="Alertas", variable=Alertas, bg="#F8F7EF").place(x=30
 # Submit Button
 siguiente_btn = Button(mywindow, text="Siguiente", width="30",
                        height="2", command=send_data, bg="#A2BAB9")
-siguiente_btn.place(x=125, y=300)
+siguiente_btn.place(x=100, y=310)
+
+fecha_label = Label(
+    text="Ingrese la ID del audio\nque desea reproducir :", bg="#F8F7EF", font=("Arial", 12))
+fecha_label.place(x=150, y=370)
+# Get and store data from users
+ID = StringVar()
+ID_entry = Entry(textvariable=ID, width="10")
+ID_entry.place(x=150, y=420)
+
+play_button = Button(mywindow, text="Play", font=("Helvetica", 12), command=play)
+play_button.place(x=250, y=420)
+
 
 mywindow.mainloop()
